@@ -1,40 +1,101 @@
-<div class="container">
+<div class="container bg-secondary bg-gradient">
   <h1>Multi Step Form</h1>
   <form>
-    <h4>User Details</h4>
-    <div class="mb-3">
-      <label for="inputName" class="form-label">Full Name</label>
-      <input type="text" class="form-control" name="" id="inputName" />
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email address</label>
-      <input type="email" class="form-control" name="" id="inputEmail" />
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" class="form-control" name="" id="inputPassword" />
-    </div>
+    <ng-container *ngIf="step == 1">
+      <h4>User Details</h4>
+      <div class="mb-3">
+        <label for="inputName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="" id="inputName" />
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="" id="inputEmail" />
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name=""
+          id="inputPassword"
+        />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="step == 2">
+      <h4>Additional Details</h4>
+      <div class="mb-3">
+        <label for="inputMobile" class="form-label">Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          name=""
+          id="inputMobile"
+          placeholder="+1"
+        />
+      </div>
+      <div class="mb-3">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Enter Addres"
+            name=""
+            id="floatingTextArea"
+          ></textarea>
+          <label for="floatingTextArea" class="form-label"
+            >Street Address</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-floating">
+          <label for="inputCountry" class="form-label">Country</label>
+          <input type="text" class="form-control" name="" id="inputCountry" />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="inputGender" class="form-label">Gender</label>
+        <select name="inputGender" id="inputGender" class="form-control">
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="">Prefer not to answer</option>
+        </select>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="step == 3">
+      <h4>Feedback/Comment</h4>
+      <div class="mb-3">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextArea"
+            name=""
+            style="height: 100px"
+          ></textarea>
+          <label for="floatingTextArea" class="form-label">Comments</label>
+        </div>
+      </div>
+    </ng-container>
+
+    <button
+      type="button"
+      class="btn btn-primary mx-2"
+      (click)="btnPrevious()"
+      [disabled]="step <= 1"
+    >
+      Previous
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mx-2"
+      (click)="btnNext()"
+      [disabled]="step >= 3"
+    >
+      Next
+    </button>
+    <button type="button" class="btn btn-success mx-2" *ngIf="step == 3">
+      Submit
+    </button>
   </form>
-  <h4>Additional Details</h4>
-  <div class="mb-3">
-    <label for="inputMobile" class="form-label">Phone Number</label>
-    <input
-      type="number"
-      class="form-control"
-      name=""
-      id="inputMobile"
-      placeholder="+1"
-    />
-  </div>
-  <div class="mb-3">
-    <div class="form-floating">
-      <textarea
-        class="form-control"
-        placeholder="Enter Addres"
-        name=""
-        id="floatingTextArea"
-      ></textarea>
-      <label for="floatingTextArea" class="form-label">Street Address</label>
-    </div>
-  </div>
 </div>
