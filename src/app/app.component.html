@@ -1,15 +1,27 @@
 <div class="container bg-secondary bg-gradient">
   <h1>Multi Step Form</h1>
-  <form>
-    <ng-container *ngIf="step == 1">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
+    <ng-container *ngIf="step == 1" formGroupName="userDetails">
       <h4>User Details</h4>
       <div class="mb-3">
         <label for="inputName" class="form-label">Full Name</label>
-        <input type="text" class="form-control" name="" id="inputName" />
+        <input
+          type="text"
+          class="form-control"
+          name=""
+          id="inputName"
+          formControlName="fname"
+        />
       </div>
       <div class="mb-3">
         <label for="inputEmail" class="form-label">Email address</label>
-        <input type="email" class="form-control" name="" id="inputEmail" />
+        <input
+          type="email"
+          class="form-control"
+          name=""
+          id="inputEmail"
+          formControlName="email"
+        />
       </div>
       <div class="mb-3">
         <label for="inputPassword" class="form-label">Password</label>
@@ -18,10 +30,11 @@
           class="form-control"
           name=""
           id="inputPassword"
+          formControlName="password"
         />
       </div>
     </ng-container>
-    <ng-container *ngIf="step == 2">
+    <ng-container *ngIf="step == 2" formGroupName="additionalDetails">
       <h4>Additional Details</h4>
       <div class="mb-3">
         <label for="inputMobile" class="form-label">Phone Number</label>
@@ -31,6 +44,7 @@
           name=""
           id="inputMobile"
           placeholder="+1"
+          formControlName="mobile"
         />
       </div>
       <div class="mb-3">
@@ -40,6 +54,7 @@
             placeholder="Enter Addres"
             name=""
             id="floatingTextArea"
+            formControlName="address"
           ></textarea>
           <label for="floatingTextArea" class="form-label"
             >Street Address</label
@@ -49,12 +64,23 @@
       <div class="mb-3">
         <div class="form-floating">
           <label for="inputCountry" class="form-label">Country</label>
-          <input type="text" class="form-control" name="" id="inputCountry" />
+          <input
+            type="text"
+            class="form-control"
+            name=""
+            id="inputCountry"
+            formControlName="country"
+          />
         </div>
       </div>
       <div class="mb-3">
         <label for="inputGender" class="form-label">Gender</label>
-        <select name="inputGender" id="inputGender" class="form-control">
+        <select
+          name="inputGender"
+          id="inputGender"
+          class="form-control"
+          formControlName="gender"
+        >
           <option value="" disabled selected>Select Gender</option>
           <option value="male">male</option>
           <option value="female">female</option>
@@ -62,7 +88,7 @@
         </select>
       </div>
     </ng-container>
-    <ng-container *ngIf="step == 3">
+    <ng-container *ngIf="step == 3" formGroupName="feedback">
       <h4>Feedback/Comment</h4>
       <div class="mb-3">
         <div class="form-floating">
@@ -72,6 +98,7 @@
             id="floatingTextArea"
             name=""
             style="height: 100px"
+            formControlName="comments"
           ></textarea>
           <label for="floatingTextArea" class="form-label">Comments</label>
         </div>
@@ -94,7 +121,7 @@
     >
       Next
     </button>
-    <button type="button" class="btn btn-success mx-2" *ngIf="step == 3">
+    <button type="submit" class="btn btn-success mx-2" *ngIf="step == 3">
       Submit
     </button>
   </form>
