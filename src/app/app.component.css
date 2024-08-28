@@ -1,0 +1,9 @@
+.btn {
+  /* Estilos normais do botão */
+
+  &:disabled {
+    /* Estilos para o botão desabilitado */
+    background-color: grey;
+    border: none;
+  }
+}
