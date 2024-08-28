@@ -41,7 +41,24 @@ export class AppComponent {
   step: any = 1;
 
   btnNext() {
+    const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+
+    if (userDetailsGroup.invalid && this.step == 1) {
+      return;
+    }
+
+    if (userDetailsGroup.invalid && this.step == 2) {
+      return;
+    }
+
     this.step += 1;
+    /* comentando essa linha e removendo a property bind do html e 
+    fazenso o if abaixo é outra maneira que
+    impede o botão avançar para uma tela em branco */
+
+    /* if (this.step < 3) {
+      this.step += 1;
+    } */
   }
 
   btnPrevious() {
