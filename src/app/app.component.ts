@@ -38,6 +38,11 @@ export class AppComponent {
       }),
     });
   }
+
+  getUserDetails() {
+    return this.myForm.get('userDetails') as FormGroup;
+  }
+
   step: any = 1;
 
   btnNext() {

@@ -1,4 +1,4 @@
-<div class="container bg-secondary bg-gradient">
+<div class="container bg-gradient" style="background-color: #caf0f8">
   <h1>Multi Step Form</h1>
   <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
     <ng-container *ngIf="step == 1" formGroupName="userDetails">
@@ -12,6 +12,15 @@
           id="inputName"
           formControlName="fname"
         />
+        <span
+          class="form-label text-danger"
+          *ngIf="
+            getUserDetails().get('fname')?.invalid &&
+            getUserDetails().get('fname')?.touched
+          "
+        >
+          *Please enter your full name
+        </span>
       </div>
       <div class="mb-3">
         <label for="inputEmail" class="form-label">Email address</label>
@@ -22,6 +31,15 @@
           id="inputEmail"
           formControlName="email"
         />
+        <span
+          class="form-label text-danger"
+          *ngIf="
+            getUserDetails().get('email')?.invalid &&
+            getUserDetails().get('email')?.touched
+          "
+        >
+          *Please enter your email addres
+        </span>
       </div>
       <div class="mb-3">
         <label for="inputPassword" class="form-label">Password</label>
@@ -32,6 +50,15 @@
           id="inputPassword"
           formControlName="password"
         />
+        <span
+          class="form-label text-danger"
+          *ngIf="
+            getUserDetails().get('password')?.invalid &&
+            getUserDetails().get('password')?.touched
+          "
+        >
+          *Please enter your password
+        </span>
       </div>
     </ng-container>
     <ng-container *ngIf="step == 2" formGroupName="additionalDetails">
