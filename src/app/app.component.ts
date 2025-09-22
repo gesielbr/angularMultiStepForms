@@ -28,7 +28,7 @@ export class AppComponent {
         password: ['', Validators.required],
       }),
       additionalDetails: formBuilder.group({
-        mobile: ['', [Validators.required, Validators.maxLength(10)]],
+        mobile: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
         address: ['', Validators.required],
         country: ['', Validators.required],
         gender: ['', Validators.required],
@@ -43,34 +43,38 @@ export class AppComponent {
     return this.myForm.get('userDetails') as FormGroup;
   }
 
+  getAdditionalDetailsGroup() {
+    return this.myForm.get('additionalDetails') as FormGroup;
+  }
+
   step: any = 1;
 
   btnNext() {
     const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+    const additionalDetailsGroup = this.myForm.get(
+      'additionalDetails'
+    ) as FormGroup;
 
     if (userDetailsGroup.invalid && this.step == 1) {
       return;
     }
 
-    if (userDetailsGroup.invalid && this.step == 2) {
+    if (additionalDetailsGroup.invalid && this.step == 2) {
       return;
     }
 
-    this.step += 1;
     /* comentando essa linha e removendo a property bind do html e 
     fazenso o if abaixo é outra maneira que
     impede o botão avançar para uma tela em branco */
 
-    /* if (this.step < 3) {
+    if (this.step < 3) {
       this.step += 1;
-    } */
+    }
   }
 
   btnPrevious() {
     this.step -= 1;
   }
 
-  formSubmit() {
-    console.log(this.myForm.value);
-  }
+  formSubmit() {}
 }

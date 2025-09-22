@@ -73,6 +73,15 @@
           placeholder="+1"
           formControlName="mobile"
         />
+        <span
+          class="form-label text-danger"
+          *ngIf="
+            getAdditionalDetailsGroup().get('mobile')?.invalid &&
+            getAdditionalDetailsGroup().get('mobile')?.touched
+          "
+        >
+          *Please enter 10-digit mobile number
+        </span>
       </div>
       <div class="mb-3">
         <div class="form-floating">
@@ -83,6 +92,15 @@
             id="floatingTextArea"
             formControlName="address"
           ></textarea>
+          <span
+            class="form-label text-danger"
+            *ngIf="
+              getAdditionalDetailsGroup().get('address')?.invalid &&
+              getAdditionalDetailsGroup().get('address')?.touched
+            "
+          >
+            *Please enter your address
+          </span>
           <label for="floatingTextArea" class="form-label"
             >Street Address</label
           >
@@ -98,6 +116,15 @@
             id="inputCountry"
             formControlName="country"
           />
+          <span
+            class="form-label text-danger"
+            *ngIf="
+              getAdditionalDetailsGroup().get('country')?.invalid &&
+              getAdditionalDetailsGroup().get('country')?.touched
+            "
+          >
+            *Please enter your country
+          </span>
         </div>
       </div>
       <div class="mb-3">
@@ -109,10 +136,19 @@
           formControlName="gender"
         >
           <option value="" disabled selected>Select Gender</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
           <option value="">Prefer not to answer</option>
         </select>
+        <span
+          class="form-label text-danger"
+          *ngIf="
+            getAdditionalDetailsGroup().get('gender')?.invalid &&
+            getAdditionalDetailsGroup().get('gender')?.touched
+          "
+        >
+          *Please select an option
+        </span>
       </div>
     </ng-container>
     <ng-container *ngIf="step == 3" formGroupName="feedback">
@@ -152,38 +188,4 @@
       Submit
     </button>
   </form>
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="formModal"
-    tabindex="-1"
-    aria-labelledby="formModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="formModalLabel">Form Data</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <pre>{{ this.myForm.value | json }}</pre>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
