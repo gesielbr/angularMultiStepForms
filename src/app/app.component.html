@@ -1,6 +1,6 @@
 <div class="container bg-gradient" style="background-color: #caf0f8">
   <h1>Multi Step Form</h1>
-  <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
+  <form [formGroup]="myForm" (ngSubmit)="formSubmit()" *ngIf="!isSubmitted">
     <ng-container *ngIf="step == 1" formGroupName="userDetails">
       <h4>User Details</h4>
       <div class="mb-3">
@@ -31,6 +31,21 @@
           id="inputEmail"
           formControlName="email"
         />
+        <p
+          class="form-label text-danger"
+          *ngIf="
+            myForm.get('userDetails.email')?.dirty &&
+            myForm.get('userDetails.email')?.invalid
+          "
+        >
+          Email required.
+        </p>
+        <p class="form-label text-warning">
+          Pristine State - {{ myForm.get("userDetails.email")?.pristine }}
+        </p>
+        <p class="form-label text-warning">
+          Dirty State - {{ myForm.get("userDetails.email")?.dirty }}
+        </p>
         <span
           class="form-label text-danger"
           *ngIf="
@@ -50,6 +65,16 @@
           id="inputPassword"
           formControlName="password"
         />
+        <div
+          class="form-label text-danger"
+          *ngIf="
+            myForm.get('userDetails.password')?.dirty &&
+            myForm.get('userDetails.password')?.invalid
+          "
+        >
+          Password required.
+        </div>
+
         <span
           class="form-label text-danger"
           *ngIf="
@@ -184,8 +209,17 @@
     >
       Next
     </button>
-    <button class="btn btn-success mx-2" *ngIf="step == 3" type="submit">
+    <button
+      class="btn btn-success mx-2"
+      *ngIf="step == 3"
+      type="submit"
+      [disabled]="myForm.pristine || myForm.invalid"
+    >
       Submit
     </button>
   </form>
+
+  <ng-container *ngIf="isSubmitted">
+    <h2 class="text-success">Form Submitted Successfully!</h2>
+  </ng-container>
 </div>

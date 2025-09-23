@@ -18,6 +18,8 @@ import {
 })
 export class AppComponent {
   title = 'angularMultiStepForms';
+  step: any = 1;
+  isSubmitted: boolean = false;
 
   myForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
@@ -25,7 +27,7 @@ export class AppComponent {
       userDetails: formBuilder.group({
         fname: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
       }),
       additionalDetails: formBuilder.group({
         mobile: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
@@ -34,7 +36,7 @@ export class AppComponent {
         gender: ['', Validators.required],
       }),
       feedback: formBuilder.group({
-        comments: [''],
+        comments: ['', [Validators.required, Validators.minLength(10)]],
       }),
     });
   }
@@ -46,8 +48,6 @@ export class AppComponent {
   getAdditionalDetailsGroup() {
     return this.myForm.get('additionalDetails') as FormGroup;
   }
-
-  step: any = 1;
 
   btnNext() {
     const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
@@ -76,5 +76,10 @@ export class AppComponent {
     this.step -= 1;
   }
 
-  formSubmit() {}
+  formSubmit() {
+    if (this.myForm.valid) {
+      this.isSubmitted = true;
+      console.log(this.myForm.value);
+    }
+  }
 }
